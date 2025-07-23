@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Understanding B+ Trees in Database Systems: The Foundation of Efficient Indexing"
-date: 2025-07-22 16:45:00 -0000
-categories: [cs-concepts]
+date: 2025-01-24 16:45:00 -0000
+categories: cs-concepts
 tags: [data-structures, databases, indexing, algorithms, performance]
 author: "TechDepth Team"
 reading_time: 9

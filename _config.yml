@@ -15,14 +15,13 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
-# Permalink structure
-permalink: /:categories/:year/:month/:day/:title/
+# Permalink structure  
+permalink: /:categories/:title/
 
 # Categories
 collections:
   posts:
     output: true
-    permalink: /:collection/:categories/:title/
 
 # Category descriptions
 category_descriptions:

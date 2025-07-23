@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Transformer Architecture Evolution: From Attention to Modern AI"
-date: 2025-07-22 09:15:00 -0000
-categories: [ai]
+date: 2025-01-25 09:15:00 -0000
+categories: ai
 tags: [ai, transformers, attention-mechanism, neural-networks, deep-learning]
 author: "TechDepth Team"
 reading_time: 8

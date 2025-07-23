@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "G1 vs ZGC: Choosing the Right Garbage Collector for Your Java Application"
-date: 2025-07-23 14:30:00 -0000
-categories: [java]
+date: 2025-01-26 14:30:00 -0000
+categories: java
 tags: [java, jvm, garbage-collection, g1gc, zgc, performance]
 author: "TechDepth Team"
 reading_time: 10

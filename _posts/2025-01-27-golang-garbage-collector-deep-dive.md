@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Golang Garbage Collector: A Deep Dive into Memory Management"
-date: 2025-07-23 10:00:00 -0000
-categories: [golang]
+date: 2025-01-27 10:00:00 -0000
+categories: golang
 tags: [golang, garbage-collection, memory-management, performance, concurrency]
 author: "TechDepth Team"
 reading_time: 12

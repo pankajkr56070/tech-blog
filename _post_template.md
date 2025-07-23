@@ -2,7 +2,7 @@
 layout: post
 title: "Your Post Title Here"
 date: YYYY-MM-DD HH:MM:SS -0000
-categories: [choose from: golang, java, ai, cs-concepts, optimization]
+categories: golang  # Choose from: golang, java, ai, cs-concepts, optimization
 tags: [tag1, tag2, tag3, tag4, tag5]
 author: "TechDepth Team"
 reading_time: X
