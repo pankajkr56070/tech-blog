@@ -1,0 +1,91 @@
+# Site Settings
+title: "TechDepth"
+description: "Advanced Programming & AI Insights - Exploring Golang, Java, AI, and Code Optimization"
+baseurl: ""
+url: "https://pankajkr56070.github.io/tech-blog/"
+author: "TechDepth Team"
+email: "contact@techdepth.blog"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Permalink structure
+permalink: /:categories/:year/:month/:day/:title/
+
+# Categories
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:categories/:title/
+
+# Category descriptions
+category_descriptions:
+  golang: "Deep dives into Go programming, concurrency, memory management, and performance optimization"
+  java: "JVM internals, garbage collection, memory optimization, and enterprise Java patterns"
+  ai: "Latest breakthroughs in machine learning, neural networks, and artificial intelligence"
+  cs-concepts: "Advanced computer science concepts, algorithms, data structures, and system design"
+  optimization: "Code refactoring techniques, performance tuning, and system optimization strategies"
+
+# Social links
+github_username: pankajkr56070
+twitter_username: techdepth
+linkedin_username: techdepth
+
+# Pagination
+paginate: 6
+paginate_path: "/page/:num/"
+
+# Exclude files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - LICENSE
+
+# Include files
+include:
+  - _pages
+
+# Default layouts
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "TechDepth Team"
+  - scope:
+      path: "_pages"
+      type: "pages"
+    values:
+      layout: "page"
+
+# SEO
+logo: /assets/images/logo.png
+twitter:
+  username: techdepth
+  card: summary_large_image
+
+# Analytics (optional)
+google_analytics: # Add your GA ID here
+
+# Syntax highlighting
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true 

@@ -1,0 +1,342 @@
+---
+layout: default
+---
+
+<style>
+.post-header {
+    background: var(--card-gradient);
+    padding: 3rem 1rem;
+    border-radius: 20px;
+    margin: 4rem 0 2rem 0;
+    text-align: center;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.post-title {
+    font-size: 2.2rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    white-space: normal;
+    max-width: calc(100% - 4rem);
+    width: calc(100% - 4rem);
+    display: block;
+    padding: 0 2rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.post-date, .post-author, .post-reading-time {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.post-category {
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.post-category:hover {
+    background: rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+}
+
+.post-content {
+    background: var(--card-gradient);
+    padding: 3rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    max-width: none;
+}
+
+.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+    color: var(--text-primary);
+    margin: 2rem 0 1rem 0;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.post-content h2 {
+    font-size: 2rem;
+    border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.post-content h3 {
+    font-size: 1.5rem;
+}
+
+.post-content p {
+    margin: 1.5rem 0;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+.post-content ul, .post-content ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.post-content li {
+    margin: 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.post-content strong {
+    color: var(--accent);
+}
+
+.post-content em {
+    color: var(--secondary);
+}
+
+.post-content a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.post-content a:hover {
+    border-bottom-color: var(--primary);
+}
+
+.post-tags {
+    margin: 2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.post-tag {
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.post-tag:hover {
+    background: rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+}
+
+.post-navigation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.nav-post {
+    background: var(--card-gradient);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+.nav-post:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+}
+
+.nav-post-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.nav-post-title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.social-share {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.social-share h4 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.share-twitter {
+    background: #1da1f2;
+    color: white;
+}
+
+.share-linkedin {
+    background: #0077b5;
+    color: white;
+}
+
+.share-reddit {
+    background: #ff4500;
+    color: white;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 768px) {
+    .post-title {
+        font-size: 1.6rem;
+        line-height: 1.4;
+        max-width: calc(100% - 2rem);
+        width: calc(100% - 2rem);
+        padding: 0 1rem;
+    }
+    
+    .post-content {
+        padding: 2rem;
+    }
+    
+    .post-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .post-navigation {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-title {
+        font-size: 1.5rem;
+        line-height: 1.4;
+    }
+    
+    .post-header {
+        padding: 2rem 1rem;
+        margin: 2rem 0;
+    }
+}
+</style>
+
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title">{{ page.title }}</h1>
+        <div class="post-meta">
+            <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">
+                {{ page.date | date: "%B %d, %Y" }}
+            </time>
+            {% if page.author %}
+                <span class="post-author">by {{ page.author }}</span>
+            {% endif %}
+            {% if page.categories %}
+                {% for category in page.categories %}
+                    <a href="{{ '/categories/' | append: category | append: '/' | relative_url }}" class="post-category">
+                        {{ category | capitalize }}
+                    </a>
+                {% endfor %}
+            {% endif %}
+            {% if page.reading_time %}
+                <span class="post-reading-time">{{ page.reading_time }} min read</span>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="post-content">
+        {{ content }}
+    </div>
+
+    {% if page.tags %}
+    <div class="post-tags">
+        {% for tag in page.tags %}
+            <a href="{{ '/tags/' | append: tag | append: '/' | relative_url }}" class="post-tag">
+                #{{ tag }}
+            </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="social-share">
+        <h4>Share this post</h4>
+        <div class="share-buttons">
+            <a href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ site.url }}{{ page.url }}" 
+               class="share-btn share-twitter" target="_blank">
+                Share on Twitter
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url }}&title={{ page.title | uri_escape }}" 
+               class="share-btn share-linkedin" target="_blank">
+                Share on LinkedIn
+            </a>
+            <a href="https://reddit.com/submit?url={{ site.url }}{{ page.url }}&title={{ page.title | uri_escape }}" 
+               class="share-btn share-reddit" target="_blank">
+                Share on Reddit
+            </a>
+        </div>
+    </div>
+
+    <nav class="post-navigation">
+        {% if page.previous.url %}
+            <a href="{{ page.previous.url | relative_url }}" class="nav-post">
+                <div class="nav-post-label">← Previous Post</div>
+                <div class="nav-post-title">{{ page.previous.title }}</div>
+            </a>
+        {% else %}
+            <div></div>
+        {% endif %}
+
+        {% if page.next.url %}
+            <a href="{{ page.next.url | relative_url }}" class="nav-post">
+                <div class="nav-post-label">Next Post →</div>
+                <div class="nav-post-title">{{ page.next.title }}</div>
+            </a>
+        {% endif %}
+    </nav>
+</article> 

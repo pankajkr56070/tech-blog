@@ -1,0 +1,28 @@
+# Jekyll generated files
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ruby/Bundle
+vendor/
+.bundle/
+Gemfile.lock
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log 

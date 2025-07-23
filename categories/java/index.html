@@ -1,0 +1,173 @@
+---
+layout: default
+title: "Java & JVM"
+permalink: /categories/java/
+---
+
+<style>
+.category-header {
+    background: var(--card-gradient);
+    padding: 3rem 0;
+    border-radius: 20px;
+    margin: 2rem 0;
+    text-align: center;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.category-title {
+    font-size: 3rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.category-description {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.category-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.post-card {
+    background: var(--card-gradient);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
+}
+
+.post-image {
+    height: 200px;
+    background: var(--gradient);
+    position: relative;
+    overflow: hidden;
+}
+
+.post-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(transparent, rgba(15, 23, 42, 0.8));
+}
+
+.post-card-content {
+    padding: 1.5rem;
+}
+
+.post-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.post-card-tag {
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.post-card-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-primary);
+}
+
+.post-card-excerpt {
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.no-posts {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .category-title {
+        font-size: 2rem;
+    }
+    
+    .posts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<section class="category-header">
+    <span class="category-icon">☕</span>
+    <h1 class="category-title">Java & JVM</h1>
+    <p class="category-description">
+        {{ site.category_descriptions.java }}
+    </p>
+</section>
+
+<section class="posts-section">
+    <div class="posts-grid">
+        {% assign java_posts = site.posts | where: 'categories', 'java' %}
+        {% if java_posts.size > 0 %}
+            {% for post in java_posts %}
+            <a href="{{ post.url | relative_url }}" class="post-card">
+                <div class="post-image"></div>
+                <div class="post-card-content">
+                    <div class="post-card-meta">
+                        <span class="post-card-tag">Java</span>
+                        {% if post.reading_time %}
+                            <span>{{ post.reading_time }} min read</span>
+                        {% endif %}
+                    </div>
+                    <h3 class="post-card-title">{{ post.title }}</h3>
+                    <p class="post-card-excerpt">
+                        {% if post.excerpt %}
+                            {{ post.excerpt | strip_html | truncate: 150 }}
+                        {% else %}
+                            {{ post.content | strip_html | truncate: 150 }}
+                        {% endif %}
+                    </p>
+                    <p class="post-card-meta">
+                        <time>{{ post.date | date: "%B %d, %Y" }}</time>
+                    </p>
+                </div>
+            </a>
+            {% endfor %}
+        {% else %}
+            <div class="no-posts">
+                <h3>No Java posts yet</h3>
+                <p>Check back soon for JVM internals and Java optimization content!</p>
+            </div>
+        {% endif %}
+    </div>
+</section> 

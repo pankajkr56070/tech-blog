@@ -1,725 +1,405 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechDepth - Advanced Programming & AI Insights</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #6366f1;
-            --secondary: #f59e0b;
-            --dark: #0f172a;
-            --dark-light: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
-            --accent: #10b981;
-            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card-gradient: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--dark);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        main {
-            margin-top: 80px;
-            padding: 2rem 0;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            background: var(--card-gradient);
-            margin: 2rem 0;
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(99, 102, 241, 0.1) 50%, transparent 70%);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: translateX(-100%); }
-            50% { transform: translateX(100%); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .category-card {
-            background: var(--card-gradient);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .category-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .category-card:hover::before {
-            left: 100%;
-        }
-
-        .category-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
-        }
-
-        .category-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .category-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .category-card p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .read-more {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: gap 0.3s ease;
-        }
-
-        .read-more:hover {
-            gap: 1rem;
-        }
-
-        .posts-section {
-            margin: 4rem 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .post-card {
-            background: var(--card-gradient);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .post-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
-        }
-
-        .post-image {
-            height: 200px;
-            background: var(--gradient);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .post-image::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background: linear-gradient(transparent, rgba(15, 23, 42, 0.8));
-        }
-
-        .post-content {
-            padding: 1.5rem;
-        }
-
-        .post-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .post-tag {
-            background: rgba(99, 102, 241, 0.2);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .post-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: var(--text-primary);
-        }
-
-        .post-excerpt {
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        .newsletter {
-            background: var(--card-gradient);
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            margin: 4rem 0;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-
-        .newsletter h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .newsletter-form {
-            display: flex;
-            max-width: 400px;
-            margin: 2rem auto 0;
-            gap: 1rem;
-        }
-
-        .newsletter input {
-            flex: 1;
-            padding: 1rem;
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 10px;
-            background: rgba(15, 23, 42, 0.8);
-            color: var(--text-primary);
-            font-size: 1rem;
-        }
-
-        .newsletter button {
-            padding: 1rem 2rem;
-            background: var(--gradient);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .newsletter button:hover {
-            transform: translateY(-2px);
-        }
-
-        footer {
-            background: var(--dark-light);
-            padding: 3rem 0;
-            text-align: center;
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .footer-section a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--primary);
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .newsletter-form {
-                flex-direction: column;
-            }
-            
-            .categories {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .floating-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: float 10s infinite linear;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="animated-bg"></div>
-    <div class="floating-particles" id="particles"></div>
-
-    <header>
-        <nav class="container">
-            <div class="logo">TechDepth</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#cs-concepts">CS Concepts</a></li>
-                <li><a href="#golang">Go Lang</a></li>
-                <li><a href="#java">Java</a></li>
-                <li><a href="#ai">AI Insights</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="container">
-        <section class="hero" id="home">
-            <div class="hero-content">
-                <h1>Deep Tech Insights</h1>
-                <p>Exploring advanced computer science concepts, system optimization, and cutting-edge AI developments</p>
-            </div>
-        </section>
-
-        <section class="categories">
-            <div class="category-card" onclick="scrollToSection('cs-concepts')">
-                <span class="category-icon">🧠</span>
-                <h3>Advanced CS Concepts</h3>
-                <p>Dive deep into algorithms, data structures, distributed systems, and theoretical computer science foundations that power modern software.</p>
-                <a href="#" class="read-more">Explore Concepts →</a>
-            </div>
-
-            <div class="category-card" onclick="scrollToSection('golang')">
-                <span class="category-icon">🐹</span>
-                <h3>Go Programming</h3>
-                <p>Master Go's concurrency model, memory management, performance optimization, and advanced patterns for building scalable systems.</p>
-                <a href="#" class="read-more">Learn Go →</a>
-            </div>
-
-            <div class="category-card" onclick="scrollToSection('java')">
-                <span class="category-icon">☕</span>
-                <h3>Java Memory & GC</h3>
-                <p>Understand JVM internals, garbage collection strategies, memory optimization, and performance tuning for enterprise applications.</p>
-                <a href="#" class="read-more">Master JVM →</a>
-            </div>
-
-            <div class="category-card" onclick="scrollToSection('ai')">
-                <span class="category-icon">🤖</span>
-                <h3>AI Advancements</h3>
-                <p>Stay updated with the latest breakthroughs in machine learning, neural networks, and artificial intelligence research.</p>
-                <a href="#" class="read-more">Discover AI →</a>
-            </div>
-        </section>
-
-        <section class="posts-section" id="cs-concepts">
-            <h2 class="section-title">Latest CS Insights</h2>
-            <div class="posts-grid">
-                <article class="post-card">
-                    <div class="post-image"></div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-tag">Algorithms</span>
-                            <span>5 min read</span>
-                        </div>
-                        <h3 class="post-title">Understanding B+ Trees in Database Systems</h3>
-                        <p class="post-excerpt">Explore how B+ trees enable efficient indexing in databases, their structure, operations, and why they're preferred over other tree structures for storage systems.</p>
-                    </div>
-                </article>
-
-                <article class="post-card">
-                    <div class="post-image"></div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-tag">Go</span>
-                            <span>8 min read</span>
-                        </div>
-                        <h3 class="post-title">Go's Memory Model and Race Conditions</h3>
-                        <p class="post-excerpt">Deep dive into Go's memory model, happens-before relationships, and how to write concurrent programs that are free from data races.</p>
-                    </div>
-                </article>
-
-                <article class="post-card">
-                    <div class="post-image"></div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-tag">Java</span>
-                            <span>12 min read</span>
-                        </div>
-                        <h3 class="post-title">G1 vs ZGC: Choosing the Right Garbage Collector</h3>
-                        <p class="post-excerpt">Compare modern JVM garbage collectors, their performance characteristics, and guidance on selecting the optimal GC for your application's needs.</p>
-                    </div>
-                </article>
-
-                <article class="post-card">
-                    <div class="post-image"></div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-tag">AI</span>
-                            <span>10 min read</span>
-                        </div>
-                        <h3 class="post-title">Transformer Architecture Evolution</h3>
-                        <p class="post-excerpt">Trace the evolution from attention mechanisms to modern transformer architectures, including recent innovations in efficiency and scale.</p>
-                    </div>
-                </article>
-
-                <article class="post-card">
-                    <div class="post-image"></div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-tag">Systems</span>
-                            <span>15 min read</span>
-                        </div>
-                        <h3 class="post-title">Distributed Consensus Algorithms Explained</h3>
-                        <p class="post-excerpt">From Paxos to Raft: understanding how distributed systems achieve consensus in the presence of failures and network partitions.</p>
-                    </div>
-                </article>
-
-                <article class="post-card">
-                    <div class="post-image"></div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-tag">Performance</span>
-                            <span>7 min read</span>
-                        </div>
-                        <h3 class="post-title">CPU Cache Optimization Techniques</h3>
-                        <p class="post-excerpt">Learn how to write cache-friendly code, understand cache hierarchies, and optimize data structures for better memory locality.</p>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section class="newsletter">
-            <h3>Stay Updated</h3>
-            <p>Get the latest insights on advanced programming concepts, system optimization, and AI developments delivered to your inbox.</p>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Categories</h4>
-                    <a href="#cs-concepts">CS Concepts</a>
-                    <a href="#golang">Go Programming</a>
-                    <a href="#java">Java & JVM</a>
-                    <a href="#ai">AI Insights</a>
+---
+layout: default
+---
+
+<style>
+.hero {
+    text-align: center;
+    padding: 4rem 0;
+    background: var(--card-gradient);
+    margin: 2rem 0;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(99, 102, 241, 0.1) 50%, transparent 70%);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.category-card {
+    background: var(--card-gradient);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.category-card:hover::before {
+    left: 100%;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+}
+
+.category-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.category-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.category-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.read-more {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+}
+
+.read-more:hover {
+    gap: 1rem;
+}
+
+.posts-section {
+    margin: 4rem 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.post-card {
+    background: var(--card-gradient);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
+}
+
+.post-image {
+    height: 200px;
+    background: var(--gradient);
+    position: relative;
+    overflow: hidden;
+}
+
+.post-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(transparent, rgba(15, 23, 42, 0.8));
+}
+
+.post-card-content {
+    padding: 1.5rem;
+}
+
+.post-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.post-card-tag {
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.post-card-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-primary);
+}
+
+.post-card-excerpt {
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.newsletter {
+    background: var(--card-gradient);
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    margin: 4rem 0;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.newsletter h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.newsletter-form {
+    display: flex;
+    max-width: 400px;
+    margin: 2rem auto 0;
+    gap: 1rem;
+}
+
+.newsletter input {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.8);
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.newsletter button {
+    padding: 1rem 2rem;
+    background: var(--gradient);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.newsletter button:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .categories {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Deep Tech Insights</h1>
+        <p>Exploring advanced computer science concepts, system optimization, and cutting-edge AI developments</p>
+    </div>
+</section>
+
+<section class="categories">
+    <a href="{{ '/categories/cs-concepts/' | relative_url }}" class="category-card">
+        <span class="category-icon">🧠</span>
+        <h3>Advanced CS Concepts</h3>
+        <p>{{ site.category_descriptions.cs-concepts }}</p>
+        <span class="read-more">Explore Concepts →</span>
+    </a>
+
+    <a href="{{ '/categories/golang/' | relative_url }}" class="category-card">
+        <span class="category-icon">🐹</span>
+        <h3>Go Programming</h3>
+        <p>{{ site.category_descriptions.golang }}</p>
+        <span class="read-more">Learn Go →</span>
+    </a>
+
+    <a href="{{ '/categories/java/' | relative_url }}" class="category-card">
+        <span class="category-icon">☕</span>
+        <h3>Java Memory & GC</h3>
+        <p>{{ site.category_descriptions.java }}</p>
+        <span class="read-more">Master JVM →</span>
+    </a>
+
+    <a href="{{ '/categories/ai/' | relative_url }}" class="category-card">
+        <span class="category-icon">🤖</span>
+        <h3>AI Advancements</h3>
+        <p>{{ site.category_descriptions.ai }}</p>
+        <span class="read-more">Discover AI →</span>
+    </a>
+</section>
+
+<section class="posts-section" id="latest-posts">
+    <h2 class="section-title">Latest Posts</h2>
+    <div class="posts-grid">
+        {% for post in site.posts limit:6 %}
+        <a href="{{ post.url | relative_url }}" class="post-card">
+            <div class="post-image"></div>
+            <div class="post-card-content">
+                <div class="post-card-meta">
+                    {% if post.categories.first %}
+                        <span class="post-card-tag">{{ post.categories.first | capitalize }}</span>
+                    {% endif %}
+                    {% if post.reading_time %}
+                        <span>{{ post.reading_time }} min read</span>
+                    {% endif %}
                 </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <a href="#">Code Examples</a>
-                    <a href="#">Tutorials</a>
-                    <a href="#">Benchmarks</a>
-                    <a href="#">References</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Connect</h4>
-                    <a href="#">GitHub</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">LinkedIn</a>
-                    <a href="#">RSS Feed</a>
-                </div>
+                <h3 class="post-card-title">{{ post.title }}</h3>
+                <p class="post-card-excerpt">
+                    {% if post.excerpt %}
+                        {{ post.excerpt | strip_html | truncate: 150 }}
+                    {% else %}
+                        {{ post.content | strip_html | truncate: 150 }}
+                    {% endif %}
+                </p>
             </div>
-            <p>&copy; 2025 TechDepth. Exploring the depths of technology.</p>
-        </div>
-    </footer>
+        </a>
+        {% endfor %}
+    </div>
+</section>
 
-    <script>
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 20;
+<section class="newsletter">
+    <h3>Stay Updated</h3>
+    <p>Get the latest insights on advanced programming concepts, system optimization, and AI developments delivered to your inbox.</p>
+    <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+</section>
 
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 10 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
+<script>
+// Newsletter form submission
+document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = this.querySelector('input').value;
+    alert(`Thank you for subscribing with ${email}! You'll receive our latest insights soon.`);
+    this.reset();
+});
+
+// Add click animation to cards
+document.querySelectorAll('.post-card, .category-card').forEach(card => {
+    card.addEventListener('click', function() {
+        this.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            this.style.transform = '';
+        }, 150);
+    });
+});
+
+// Intersection Observer for animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
         }
+    });
+}, observerOptions);
 
-        // Smooth scrolling for navigation
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Newsletter form submission
-        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input').value;
-            alert(`Thank you for subscribing with ${email}! You'll receive our latest insights soon.`);
-            this.reset();
-        });
-
-        // Initialize particles on load
-        window.addEventListener('load', createParticles);
-
-        // Add scroll effect to header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(15, 23, 42, 0.98)';
-            } else {
-                header.style.background = 'rgba(15, 23, 42, 0.95)';
-            }
-        });
-
-        // Add click animation to cards
-        document.querySelectorAll('.post-card, .category-card').forEach(card => {
-            card.addEventListener('click', function() {
-                this.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.post-card, .category-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
-</body>
-</html>
+// Observe elements for animation
+document.querySelectorAll('.post-card, .category-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
+</script>
