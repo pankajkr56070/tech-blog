@@ -15,7 +15,7 @@ plugins:
   - jekyll-seo-tag
 
 # Permalink structure  
-permalink: /:categories/:title/
+permalink: /:year/:month/:day/:title/
 
 # Categories
 collections:
