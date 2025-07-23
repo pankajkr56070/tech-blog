@@ -1,8 +1,8 @@
 # Site Settings
 title: "TechDepth"
 description: "Advanced Programming & AI Insights - Exploring Golang, Java, AI, and Code Optimization"
-baseurl: ""
-url: "https://pankajkr56070.github.io/tech-blog/"
+baseurl: "/tech-blog"
+url: "https://pankajkr56070.github.io"
 author: "TechDepth Team"
 email: "contact@techdepth.blog"
 
